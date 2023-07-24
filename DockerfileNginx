@@ -1,0 +1,16 @@
+FROM debian:buster
+
+RUN apt update -y && apt upgrade -y && \
+    apt install -y \
+      man \
+      less \
+      vim \
+      nginx
+
+RUN apt update -y && apt upgrade -y
+
+COPY nginx.conf /etc/nginx/conf.d/
+
+COPY html/ /var/www/html/
+
+CMD [ "nginx", "-g", "daemon off;" ]
